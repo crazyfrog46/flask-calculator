@@ -80,7 +80,7 @@ pipeline {
           sh '''
             set -e
             echo "Deploying to EC2 instance ${APP_HOST}..."
-            RSYNC_RSH="ssh -o StrictHostKeyChecking=no"
+            ssh -o StrictHostKeyChecking=no ubuntu@host "command"
 
             # Ensure target directory exists and is owned by app user
             ssh -o StrictHostKeyChecking=no ${APP_SSH} "ssh ubuntu@${APP_HOST} "mkdir -p /opt/calculator-app"
