@@ -83,7 +83,7 @@ pipeline {
             RSYNC_RSH="ssh -o StrictHostKeyChecking=no"
 
             # Ensure target directory exists and is owned by app user
-            ssh -o StrictHostKeyChecking=no ${APP_SSH} "sudo mkdir -p ${APP_DIR} && sudo chown -R app:app ${APP_DIR}"
+            ssh -o StrictHostKeyChecking=no ${APP_SSH} "ssh ubuntu@${APP_HOST} "mkdir -p /opt/calculator-app"
 
             # Sync source code safely (preserve venv folder)
             rsync -az --delete --exclude 'venv/' -e "$RSYNC_RSH" ./ ${APP_SSH}:${APP_DIR}/
