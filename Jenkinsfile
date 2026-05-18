@@ -8,11 +8,11 @@ pipeline {
   }
 
   environment {
-    APP_HOST = 'ec2-13-63-189-37.eu-north-1.compute.amazonaws.com'
-    APP_SSH  = "app@${APP_HOST}"
+    APP_HOST = 'ec2-16-16-160-0.eu-north-1.compute.amazonaws.com'
+    APP_SSH  = "ubuntu@${APP_HOST}"
     APP_DIR  = "/opt/calculator-app"
     VENV_DIR = "${APP_DIR}/venv"
-    SSH_CRED = "app-ssh-key"
+    SSH_CRED = "ec2-key"
   }
 
   triggers {
