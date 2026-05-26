@@ -80,7 +80,7 @@ pipeline {
           sh '''
             set -e
             echo "Deploying to EC2 instance ${APP_HOST}..."
-            ssh -o StrictHostKeyChecking=no ubuntu@host "command"
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-16-16-160-0.eu-north-1.compute.amazonaws.com
 
             # Ensure target directory exists and is owned by app user
             ssh -o StrictHostKeyChecking=no ${APP_SSH} "ssh ubuntu@${APP_HOST} "mkdir -p /opt/calculator-app"
