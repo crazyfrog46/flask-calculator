@@ -63,7 +63,7 @@ pipeline {
 
     stage('Deploy to EC2') {
       steps {
-        sshagent(credentials: ['ubuntu']) {
+        sshagent(credentials: ['ec2-key']) {
           sh '''
             set -e
 
