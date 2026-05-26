@@ -62,29 +62,29 @@ pipeline {
     }
 
     stage('Deploy to EC2') {
-      steps {
-        sshagent(credentials: ['ec2-key']) {
-          sh '''
-            set -e
+  steps {
+    sshagent(credentials: ['ec2-key']) {
+      sh '''
+        set -e
 
-            scp -o StrictHostKeyChecking=no build.tgz ubuntu@ec2-16-16-160-0.eu-north-1.compute.amazonaws.com:~/
+        scp -o StrictHostKeyChecking=no build.tgz ubuntu@172.31.10.160:~/
 
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-16-16-160-0.eu-north-1.compute.amazonaws.com '
-              set -e
-              mkdir -p /opt/calculator-app
-              tar xzf ~/build.tgz -C /opt/calculator-app
-              cd /opt/calculator-app
-              python3 -m venv venv || true
-              . venv/bin/activate
-              pip install --upgrade pip
-              pip install -r requirements.txt
-              pip install gunicorn
-              sudo systemctl restart calculator
-            '
-          '''
-        }
-      }
+        ssh -o StrictHostKeyChecking=no ubuntu@172.31.10.160 '
+          set -e
+          mkdir -p /opt/calculator-app
+          tar xzf ~/build.tgz -C /opt/calculator-app
+          cd /opt/calculator-app
+          python3 -m venv venv || true
+          . venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install gunicorn
+          sudo systemctl restart calculator
+        '
+      '''
     }
+  }
+}
   }
 
   post {
