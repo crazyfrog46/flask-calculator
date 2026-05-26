@@ -2,17 +2,9 @@ pipeline {
   agent any
 
   options {
-    timeout(time: 20, unit: 'MINUTES')     // Stop builds that hang
-    disableConcurrentBuilds()              // Prevent overlapping runs
-    timestamps()                           // Add timestamps to logs
-  }
-
-  environment {
-    APP_HOST = 'ec2-16-16-160-0.eu-north-1.compute.amazonaws.com'
-    APP_SSH  = "ubuntu@${APP_HOST}"
-    APP_DIR  = "/opt/calculator-app"
-    VENV_DIR = "${APP_DIR}/venv"
-    SSH_CRED = "ec2-key"
+    timeout(time: 20, unit: 'MINUTES')
+    disableConcurrentBuilds()
+    timestamps()
   }
 
   triggers {
@@ -36,8 +28,6 @@ pipeline {
       steps {
         sh '''
           set -e
-          echo "Setting up Python virtual environment..."
-          python3 --version
           python3 -m venv .venv
           . .venv/bin/activate
           pip install --upgrade pip
@@ -48,15 +38,13 @@ pipeline {
 
     stage('Install deps & Test') {
       steps {
-        timeout(time: 5, unit: 'MINUTES') {  // Safety timeout for dependency setup/tests
+        timeout(time: 5, unit: 'MINUTES') {
           sh '''
             set -e
-            echo "Installing dependencies and running tests..."
             . .venv/bin/activate
             pip install -r requirements.txt
             pip install pytest
-            echo "Running pytest..."
-            pytest --maxfail=1 --disable-warnings -q || echo "Tests failed but continuing."
+            pytest --maxfail=1 --disable-warnings -q
             deactivate || true
           '''
         }
@@ -67,7 +55,6 @@ pipeline {
       steps {
         sh '''
           set -e
-          echo "Packaging application..."
           tar czf build.tgz --exclude .venv --exclude __pycache__ --exclude .git *
         '''
         archiveArtifacts artifacts: 'build.tgz', fingerprint: true
@@ -76,32 +63,24 @@ pipeline {
 
     stage('Deploy to EC2') {
       steps {
-        sshagent(credentials: [env.SSH_CRED]) {
+        sshagent(credentials: ['ubuntu']) {
           sh '''
             set -e
-            echo "Deploying to EC2 instance ${APP_HOST}..."
-            ssh -o StrictHostKeyChecking=no ubuntu@ec2-16-16-160-0.eu-north-1.compute.amazonaws.com
 
-            # Ensure target directory exists and is owned by app user
-            ssh -o StrictHostKeyChecking=no ${APP_SSH} "ssh ubuntu@${APP_HOST} "mkdir -p /opt/calculator-app"
+            scp -o StrictHostKeyChecking=no build.tgz ubuntu@ec2-16-16-160-0.eu-north-1.compute.amazonaws.com:~/
 
-            # Sync source code safely (preserve venv folder)
-            rsync -az --delete --exclude 'venv/' -e "$RSYNC_RSH" ./ ${APP_SSH}:${APP_DIR}/
-
-            # Create or update Python environment, install gunicorn, and restart service
-            ssh -o StrictHostKeyChecking=no ${APP_SSH} "bash -lc '
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-16-16-160-0.eu-north-1.compute.amazonaws.com '
               set -e
-              cd ${APP_DIR}
-              [ -d ${VENV_DIR} ] || python3 -m venv ${VENV_DIR}
-              . ${VENV_DIR}/bin/activate
+              mkdir -p /opt/calculator-app
+              tar xzf ~/build.tgz -C /opt/calculator-app
+              cd /opt/calculator-app
+              python3 -m venv venv || true
+              . venv/bin/activate
               pip install --upgrade pip
               pip install -r requirements.txt
               pip install gunicorn
-              sudo systemctl daemon-reload
               sudo systemctl restart calculator
-              systemctl --no-pager -l status calculator || true
-              deactivate || true
-            '"
+            '
           '''
         }
       }
