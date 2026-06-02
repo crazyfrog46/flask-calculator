@@ -26,11 +26,8 @@
     body::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
         radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(139, 69, 19, 0.1) 0%, transparent 50%);
       pointer-events: none;
@@ -44,73 +41,35 @@
       filter: drop-shadow(0 0 10px rgba(255, 100, 0, 0.5));
     }
 
-    .dragon1 {
-      top: 10%;
-      animation-delay: 0s;
-    }
-
-    .dragon2 {
-      top: 60%;
-      animation-delay: 7s;
-      animation-duration: 25s;
-    }
-
-    .dragon3 {
-      top: 35%;
-      animation-delay: 14s;
-      animation-duration: 22s;
-    }
+    .dragon1 { top: 10%; animation-delay: 0s; }
+    .dragon2 { top: 60%; animation-delay: 7s; animation-duration: 25s; }
+    .dragon3 { top: 35%; animation-delay: 14s; animation-duration: 22s; }
 
     @keyframes flyDragon {
-      0% {
-        left: -10%;
-        transform: rotate(-15deg);
-      }
-      50% {
-        transform: rotate(-10deg) translateY(-20px);
-      }
-      100% {
-        left: 110%;
-        transform: rotate(-15deg);
-      }
+      0%   { left: -10%; transform: rotate(-15deg); }
+      50%  { transform: rotate(-10deg) translateY(-20px); }
+      100% { left: 110%; transform: rotate(-15deg); }
     }
 
     .fire {
       position: absolute;
-      width: 60px;
-      height: 30px;
+      width: 60px; height: 30px;
       font-size: 2rem;
       animation: breathFire 3s ease-in-out infinite;
       pointer-events: none;
     }
 
     @keyframes breathFire {
-      0%, 100% {
-        opacity: 0;
-        transform: translateX(0) scale(0.5);
-      }
-      20% {
-        opacity: 1;
-        transform: translateX(30px) scale(1);
-      }
-      40% {
-        opacity: 0.8;
-        transform: translateX(60px) scale(1.2);
-      }
-      60% {
-        opacity: 0.4;
-        transform: translateX(90px) scale(0.8);
-      }
-      80% {
-        opacity: 0;
-        transform: translateX(120px) scale(0.5);
-      }
+      0%, 100% { opacity: 0; transform: translateX(0) scale(0.5); }
+      20%  { opacity: 1; transform: translateX(30px) scale(1); }
+      40%  { opacity: 0.8; transform: translateX(60px) scale(1.2); }
+      60%  { opacity: 0.4; transform: translateX(90px) scale(0.8); }
+      80%  { opacity: 0; transform: translateX(120px) scale(0.5); }
     }
 
     .flag {
       position: absolute;
-      width: 80px;
-      height: 120px;
+      width: 80px; height: 120px;
       border: 2px solid #8b7355;
       border-radius: 4px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -119,67 +78,49 @@
     }
 
     .flag-targaryen {
-      top: 5%;
-      left: 5%;
+      top: 5%; left: 5%;
       background: linear-gradient(145deg, #1a0000 0%, #330000 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #d4af37;
-      font-size: 2.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #d4af37; font-size: 2.5rem;
     }
 
     .flag-stark {
-      top: 5%;
-      right: 5%;
+      top: 5%; right: 5%;
       background: linear-gradient(145deg, #1a1a1a 0%, #333333 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #cccccc;
-      font-size: 2rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: #cccccc; font-size: 2rem;
     }
 
     .flag-text {
-      font-size: 0.5rem;
-      margin-top: 0.25rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: bold;
+      font-size: 0.5rem; margin-top: 0.25rem;
+      text-transform: uppercase; letter-spacing: 1px; font-weight: bold;
     }
 
     @keyframes flagWave {
-      0%, 100% {
-        transform: rotate(-2deg);
-      }
-      50% {
-        transform: rotate(2deg);
-      }
+      0%, 100% { transform: rotate(-2deg); }
+      50%       { transform: rotate(2deg); }
     }
 
     .calculator {
       background: linear-gradient(145deg, #2c2c3e 0%, #1e1e2f 100%);
       border: 3px solid #8b7355;
       border-radius: 16px;
-      box-shadow: 
+      box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.7),
         inset 0 1px 0 rgba(139, 115, 85, 0.3),
         0 0 30px rgba(139, 115, 85, 0.2);
       padding: 2rem;
-      width: 100%;
-      max-width: 420px;
+      width: 100%; max-width: 420px;
       animation: forgeIn 0.6s ease-out;
-      position: relative;
-      z-index: 3;
+      position: relative; z-index: 3;
     }
 
     .calculator::before {
       content: '⚔';
       position: absolute;
-      top: -15px;
-      left: 50%;
+      top: -15px; left: 50%;
       transform: translateX(-50%);
       font-size: 2rem;
       background: linear-gradient(145deg, #2c2c3e 0%, #1e1e2f 100%);
@@ -188,37 +129,40 @@
     }
 
     @keyframes forgeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    h1 {
+    /* ── Title ── */
+    .title-block {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .title-main {
+      display: block;
       color: #d4af37;
       font-size: 1.75rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 3px;
+      line-height: 1.2;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      font-family: 'Cinzel', 'Times New Roman', serif;
     }
 
-    .subtitle {
-      text-align: center;
+    .title-sub {
+      display: block;
       color: #8b7355;
-      font-size: 0.75rem;
-      margin-top: -1rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: 2px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 4px;
       text-transform: uppercase;
+      margin-top: 0.3rem;
+      font-family: 'Cinzel', 'Times New Roman', serif;
     }
 
+    /* ── Display ── */
     .display {
       background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
       border: 2px solid #8b7355;
@@ -226,42 +170,32 @@
       padding: 1.25rem;
       margin-bottom: 1.5rem;
       min-height: 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: flex; flex-direction: column; justify-content: center;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     .expression {
-      color: #8b7355;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-      min-height: 1.2rem;
+      color: #8b7355; font-size: 0.9rem;
+      margin-bottom: 0.5rem; min-height: 1.2rem;
       font-family: 'Courier New', monospace;
     }
 
     .result {
-      color: #d4af37;
-      font-size: 2rem;
-      font-weight: 600;
+      color: #d4af37; font-size: 2rem; font-weight: 600;
       word-break: break-all;
       text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
     }
 
+    /* ── Inputs ── */
     .input-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.75rem; margin-bottom: 1rem;
     }
 
     input {
-      padding: 0.875rem;
-      font-size: 1.125rem;
-      border: 2px solid #8b7355;
-      border-radius: 8px;
-      outline: none;
-      transition: all 0.3s ease;
+      padding: 0.875rem; font-size: 1.125rem;
+      border: 2px solid #8b7355; border-radius: 8px;
+      outline: none; transition: all 0.3s ease;
       font-family: 'Courier New', monospace;
       background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
       color: #d4af37;
@@ -269,201 +203,103 @@
       width: 100%;
     }
 
-    input::placeholder {
-      color: #6b5d4f;
-    }
+    input::placeholder { color: #6b5d4f; }
 
     input:focus {
       border-color: #d4af37;
-      box-shadow: 
+      box-shadow:
         inset 0 2px 4px rgba(0, 0, 0, 0.5),
         0 0 15px rgba(212, 175, 55, 0.3);
     }
 
+    /* ── Operation buttons ── */
     .operations {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0.75rem; margin-bottom: 1rem;
     }
 
     button {
-      padding: 1rem;
-      font-size: 1.25rem;
-      font-weight: 700;
-      border: 2px solid #8b7355;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-      color: #d4af37;
+      padding: 1rem; font-size: 1.25rem; font-weight: 700;
+      border: 2px solid #8b7355; border-radius: 8px;
+      cursor: pointer; transition: all 0.2s ease;
+      font-family: inherit; color: #d4af37;
       background: linear-gradient(145deg, #2c2c3e 0%, #1e1e2f 100%);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
-    .op-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(212, 175, 55, 0.3);
-      border-color: #d4af37;
-    }
-
-    .op-btn:active {
-      transform: translateY(0);
-    }
+    .op-btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(212, 175, 55, 0.3); border-color: #d4af37; }
+    .op-btn:active { transform: translateY(0); }
 
     .op-btn.active {
       background: linear-gradient(145deg, #8b7355 0%, #6b5d4f 100%);
       border-color: #d4af37;
-      box-shadow: 
-        0 4px 12px rgba(212, 175, 55, 0.4),
-        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    .action-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
+    /* ── Action buttons ── */
+    .action-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
-    .equals-btn {
-      background: linear-gradient(145deg, #2d5016 0%, #1e3610 100%);
-      border-color: #4a7c29;
-      color: #a8d08d;
-    }
+    .equals-btn { background: linear-gradient(145deg, #2d5016 0%, #1e3610 100%); border-color: #4a7c29; color: #a8d08d; }
+    .equals-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(74, 124, 41, 0.4); border-color: #a8d08d; }
 
-    .equals-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(74, 124, 41, 0.4);
-      border-color: #a8d08d;
-    }
+    .clear-btn { background: linear-gradient(145deg, #5c1a1a 0%, #3d1010 100%); border-color: #8b3a3a; color: #e8b4b4; }
+    .clear-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(139, 58, 58, 0.4); border-color: #e8b4b4; }
 
-    .clear-btn {
-      background: linear-gradient(145deg, #5c1a1a 0%, #3d1010 100%);
-      border-color: #8b3a3a;
-      color: #e8b4b4;
-    }
-
-    .clear-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(139, 58, 58, 0.4);
-      border-color: #e8b4b4;
-    }
-
-    .history {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 2px solid #8b7355;
-    }
+    /* ── History ── */
+    .history { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid #8b7355; }
 
     .history-title {
-      color: #d4af37;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      color: #d4af37; font-size: 0.85rem; font-weight: 600;
+      margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
-    .history-list {
-      max-height: 150px;
-      overflow-y: auto;
-    }
-
-    .history-list::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .history-list::-webkit-scrollbar-track {
-      background: #1a1a2e;
-      border-radius: 4px;
-    }
-
-    .history-list::-webkit-scrollbar-thumb {
-      background: #8b7355;
-      border-radius: 4px;
-    }
+    .history-list { max-height: 150px; overflow-y: auto; }
+    .history-list::-webkit-scrollbar { width: 8px; }
+    .history-list::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 4px; }
+    .history-list::-webkit-scrollbar-thumb { background: #8b7355; border-radius: 4px; }
 
     .history-item {
       background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
-      border: 1px solid #8b7355;
-      padding: 0.625rem;
-      border-radius: 6px;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      color: #8b7355;
-      transition: all 0.2s ease;
-      cursor: pointer;
+      border: 1px solid #8b7355; padding: 0.625rem; border-radius: 6px;
+      margin-bottom: 0.5rem; font-size: 0.9rem; color: #8b7355;
+      transition: all 0.2s ease; cursor: pointer;
       font-family: 'Courier New', monospace;
     }
 
     .history-item:hover {
-      border-color: #d4af37;
-      color: #d4af37;
+      border-color: #d4af37; color: #d4af37;
       transform: translateX(4px);
       box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
     }
 
     .error-message {
-      color: #e8b4b4;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      text-align: center;
+      color: #e8b4b4; font-size: 0.9rem;
+      margin-top: 0.5rem; text-align: center;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      .flag {
-        width: 60px;
-        height: 90px;
-        font-size: 1.5rem;
-      }
-      
-      .flag-stark {
-        font-size: 1.5rem;
-      }
-      
-      .flag-text {
-        font-size: 0.4rem;
-      }
-      
-      .dragon {
-        font-size: 2rem;
-      }
+      .flag { width: 60px; height: 90px; font-size: 1.5rem; }
+      .flag-stark { font-size: 1.5rem; }
+      .flag-text { font-size: 0.4rem; }
+      .dragon { font-size: 2rem; }
     }
 
     @media (max-width: 480px) {
-      .calculator {
-        padding: 1.5rem;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-        letter-spacing: 2px;
-      }
-
-      .result {
-        font-size: 1.75rem;
-      }
-      
-      .flag {
-        width: 50px;
-        height: 75px;
-        font-size: 1.2rem;
-      }
-      
-      .flag-stark {
-        font-size: 1.2rem;
-      }
-      
-      .flag-text {
-        font-size: 0.35rem;
-      }
+      .calculator { padding: 1.5rem; }
+      .title-main { font-size: 1.5rem; letter-spacing: 2px; }
+      .result { font-size: 1.75rem; }
+      .flag { width: 50px; height: 75px; font-size: 1.2rem; }
+      .flag-stark { font-size: 1.2rem; }
+      .flag-text { font-size: 0.35rem; }
     }
   </style>
 </head>
 <body>
+
   <!-- Targaryen Flag -->
   <div class="flag flag-targaryen">
     <div>🐉</div>
@@ -482,9 +318,13 @@
   <div class="dragon dragon3">🐉<span class="fire">🔥</span></div>
 
   <div class="calculator">
-    <h1>⚔ The Calculator ⚔</h1>
-    <h1><div class="subtitle">Of Thrones</div></h1>
-    
+
+    <!-- Title -->
+    <div class="title-block">
+      <span class="title-main">⚔ The Calculator ⚔</span>
+      <span class="title-sub">Of Thrones</span>
+    </div>
+
     <div class="display">
       <div class="expression" id="expression"></div>
       <div class="result" id="result">0</div>
@@ -513,28 +353,22 @@
       <div class="history-title">⚜ Historic Calculations ⚜</div>
       <div class="history-list" id="history"></div>
     </div>
+
   </div>
 
   <script>
     let currentOp = 'add';
     let history = [];
 
-    const opSymbols = {
-      add: '+',
-      sub: '−',
-      mul: '×',
-      div: '÷'
-    };
+    const opSymbols = { add: '+', sub: '−', mul: '×', div: '÷' };
 
-    const numAInput = document.getElementById('numA');
-    const numBInput = document.getElementById('numB');
+    const numAInput   = document.getElementById('numA');
+    const numBInput   = document.getElementById('numB');
     const expressionEl = document.getElementById('expression');
-    const resultEl = document.getElementById('result');
-    const errorEl = document.getElementById('error');
-    const historyEl = document.getElementById('history');
-    const opButtons = document.querySelectorAll('.op-btn');
-    const calculateBtn = document.getElementById('calculate');
-    const clearBtn = document.getElementById('clear');
+    const resultEl    = document.getElementById('result');
+    const errorEl     = document.getElementById('error');
+    const historyEl   = document.getElementById('history');
+    const opButtons   = document.querySelectorAll('.op-btn');
 
     opButtons.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -567,39 +401,27 @@
       }
 
       let result;
-      switch(currentOp) {
-        case 'add':
-          result = a + b;
-          break;
-        case 'sub':
-          result = a - b;
-          break;
-        case 'mul':
-          result = a * b;
-          break;
+      switch (currentOp) {
+        case 'add': result = a + b; break;
+        case 'sub': result = a - b; break;
+        case 'mul': result = a * b; break;
         case 'div':
-          if (b === 0) {
-            errorEl.textContent = 'Cannot divide by zero';
-            return;
-          }
+          if (b === 0) { errorEl.textContent = 'Cannot divide by zero'; return; }
           result = a / b;
           break;
       }
 
       result = Math.round(result * 100000000) / 100000000;
       resultEl.textContent = result;
-
-      const calculation = `${a} ${opSymbols[currentOp]} ${b} = ${result}`;
-      addToHistory(calculation);
+      addToHistory(`${a} ${opSymbols[currentOp]} ${b} = ${result}`);
     }
 
     function addToHistory(calc) {
       history.unshift(calc);
       if (history.length > 5) history.pop();
-      
-      historyEl.innerHTML = history.map(item => 
-        `<div class="history-item">${item}</div>`
-      ).join('');
+      historyEl.innerHTML = history
+        .map(item => `<div class="history-item">${item}</div>`)
+        .join('');
     }
 
     function clear() {
@@ -613,16 +435,10 @@
       currentOp = 'add';
     }
 
-    calculateBtn.addEventListener('click', calculate);
-    clearBtn.addEventListener('click', clear);
-
-    numAInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') calculate();
-    });
-
-    numBInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') calculate();
-    });
+    document.getElementById('calculate').addEventListener('click', calculate);
+    document.getElementById('clear').addEventListener('click', clear);
+    numAInput.addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
+    numBInput.addEventListener('keypress', e => { if (e.key === 'Enter') calculate(); });
 
     updateExpression();
   </script>
