@@ -13,7 +13,7 @@ pipeline {
 
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
-    IMAGE_NAME = 'thecrazyfrog46@gmail.com/flask-calculator'
+    IMAGE_NAME = 'crazyfrog46/flask-calculator'
     IMAGE_TAG = "${env.BUILD_NUMBER}"
   }
 
