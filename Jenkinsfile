@@ -11,80 +11,64 @@ pipeline {
     githubPush()
   }
 
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+    IMAGE_NAME = 'thecrazyfrog46@gmail.com/flask-calculator'
+    IMAGE_TAG = "${env.BUILD_NUMBER}"
+  }
+
   stages {
 
     stage('Checkout') {
       steps {
         checkout scm
-        sh '''
-          set -e
-          echo "Git version:"
-          git --version
-        '''
       }
     }
 
-    stage('Setup Python') {
+    stage('Setup Python & Install deps') {
       steps {
         sh '''
           set -e
           python3 -m venv .venv
           . .venv/bin/activate
           pip install --upgrade pip
-          deactivate || true
+          pip install -r requirements.txt
         '''
       }
     }
 
-    stage('Install deps & Test') {
+    stage('Run Tests') {
       steps {
         timeout(time: 5, unit: 'MINUTES') {
           sh '''
             set -e
             . .venv/bin/activate
-            pip install -r requirements.txt
-            pip install pytest
             pytest --maxfail=1 --disable-warnings -q
-            deactivate || true
           '''
         }
       }
     }
 
-    stage('Package') {
+    stage('Build Docker Image') {
       steps {
         sh '''
           set -e
-          tar czf build.tgz --exclude .venv --exclude __pycache__ --exclude .git *
+          docker build -t $IMAGE_NAME:$IMAGE_TAG .
+          docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
         '''
-        archiveArtifacts artifacts: 'build.tgz', fingerprint: true
       }
     }
 
-    stage('Deploy to EC2') {
-  steps {
-    sshagent(credentials: ['ec2-key']) {
-      sh '''
-        set -e
-
-        scp -o StrictHostKeyChecking=no build.tgz ubuntu@172.31.10.160:~/
-
-        ssh -o StrictHostKeyChecking=no ubuntu@172.31.10.160 '
+    stage('Push to DockerHub') {
+      steps {
+        sh '''
           set -e
-          mkdir -p /opt/calculator-app
-          tar xzf ~/build.tgz -C /opt/calculator-app
-          cd /opt/calculator-app
-          python3 -m venv venv || true
-          . venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install gunicorn
-          sudo systemctl restart calculator
-        '
-      '''
+          echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u "$DOCKERHUB_CREDENTIALS_USR" --password-stdin
+          docker push $IMAGE_NAME:$IMAGE_TAG
+          docker push $IMAGE_NAME:latest
+        '''
+      }
     }
-  }
-}
   }
 
   post {
@@ -93,10 +77,10 @@ pipeline {
       cleanWs(deleteDirs: true)
     }
     success {
-      echo '✅ Build and deploy succeeded.'
+      echo '✅ Build, test, and image push succeeded.'
     }
     failure {
-      echo '❌ Build or deploy failed.'
+      echo '❌ Pipeline failed.'
     }
   }
 }
