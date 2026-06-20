@@ -15,6 +15,7 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
     IMAGE_NAME = 'crazyfrog46/flask-calculator'
     IMAGE_TAG = "${env.BUILD_NUMBER}"
+    SCANNER_HOME = tool 'SonarScanner'
   }
 
   stages {
@@ -45,6 +46,24 @@ pipeline {
             . .venv/bin/activate
             pytest --maxfail=1 --disable-warnings -q
           '''
+        }
+      }
+    }
+
+    stage('SonarQube Analysis') {
+      steps {
+        withSonarQubeEnv('MySonarQube') {
+          sh '''
+            ${SCANNER_HOME}/bin/sonar-scanner
+          '''
+        }
+      }
+    }
+
+    stage('Quality Gate') {
+      steps {
+        timeout(time: 5, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
         }
       }
     }
