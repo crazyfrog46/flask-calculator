@@ -88,18 +88,19 @@ pipeline {
         '''
       }
     }
-  }
-stage('Update Manifests Repo') {
-  steps {
-    withCredentials([usernamePassword(credentialsId: 'github-manifests-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
-      sh '''
-        set -e
-        chmod +x update-manifest.sh
-        ./update-manifest.sh $IMAGE_TAG
-      '''
+
+    stage('Update Manifests Repo') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'github-manifests-credentials', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
+          sh '''
+            set -e
+            chmod +x update-manifest.sh
+            ./update-manifest.sh $IMAGE_TAG
+          '''
+        }
+      }
     }
   }
-}
 
   post {
     always {
